@@ -27,6 +27,7 @@ To get started with this project, follow these steps:
 
 Ensure you have the following installed on your local development environment:
 
+- [Docker](https://www.docker.com/products/docker-desktop/)
 - [Node.js](https://nodejs.org/en/download/package-manager)
 - [npm](https://www.npmjs.com/) (Node Package Manager, comes with Node.js)
 
@@ -43,6 +44,19 @@ git clone https://github.com/PaulosSouza/to-do-the-new-way.git && cd to-do-the-n
 
 ```bash
 npm install
+```
+
+**Docker volume for mongodb**
+It is necessary to set the permissions of the mongodb folder to 777 before starting the container.
+
+```bash
+mkdir -p .docker/mongodb && sudo chmod -R 777 .docker/mongodb
+```
+
+**Run docker compose**
+
+```bash
+docker-compose up -d
 ```
 
 ### Environment Variables
