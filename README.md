@@ -28,7 +28,7 @@ To get started with this project, follow these steps:
 Ensure you have the following installed on your local development environment:
 
 - [Node.js](https://nodejs.org/en/download/package-manager)
-- [npm]((https://www.npmjs.com/)) (Node Package Manager, comes with Node.js)
+- [npm](https://www.npmjs.com/) (Node Package Manager, comes with Node.js)
 
 
 ### Installation
