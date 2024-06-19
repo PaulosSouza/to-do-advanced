@@ -1,0 +1,27 @@
+services:
+  postgres:
+    container_name: to-do-api-pg
+    image: postgres
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: docker
+      PGPORT: 5432
+      POSTGRES_DB: to-do-api
+      PGDATA: /data/postgres
+    volumes:
+      - ./.docker/pg:/data/postgres
+  
+  mongodb:
+    container_name: to-do-api-mongo
+    image: mongodb/mongodb-community-server
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      MONGODB_INITDB_ROOT_USERNAME: docker
+      MONGODB_INITDB_ROOT_PASSWORD: docker
+    volumes:
+      - ./.docker/mongodb:/data/db  
