@@ -1,6 +1,6 @@
 {
-  "name": "typescript-template",
-  "version": "1.0.4",
+  "name": "to-do-the-new-way",
+  "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
