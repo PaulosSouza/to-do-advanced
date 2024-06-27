@@ -37,7 +37,7 @@ Ensure you have the following installed on your local development environment:
 **Clone the project and access the folder**
 
 ```bash
-git clone https://github.com/PaulosSouza/to-do-the-new-way.git && cd to-do-the-new-way
+git clone https://github.com/PaulosSouza/to-do-advanced.git && cd to-do-the-new-way
 ```
 
 **Install the dependencies**
