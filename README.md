@@ -1,12 +1,12 @@
 <div align="center">
-  <img src="./.github/assets/logo.png" alt="To do - The new way" width="80">
+  <img src="./.github/assets/logo.png" alt="To do - Advanced" width="80">
   <br>
-  <h1>To do - The New Way</h1>
+  <h1>To do - Advanced</h1>
   <strong>Redefining Task Management with Advanced Features</strong>
 </div>
 <br>
 
-"To Do - The new way" is a task list application with advanced features, including user authentication and an audit log to track all user actions.
+"To Do - Advanced" is a task list application with advanced features, including user authentication and an audit log to track all user actions.
 
 ## Table of Contents
 
