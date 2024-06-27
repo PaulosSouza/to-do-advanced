@@ -8,6 +8,7 @@ export async function usersRouter(app: FastifyInstance) {
   app.zod.post(
     '/users',
     {
+      tags: ['users'],
       operationId: 'createUser',
       body: 'RegisterUserBodySchema',
     },

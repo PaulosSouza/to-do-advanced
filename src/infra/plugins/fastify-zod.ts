@@ -11,9 +11,16 @@ export async function loadFastifyZod(app: FastifyInstance) {
         openapi: '3.0.0',
         info: {
           title: 'To do - The New Way',
-          description: 'Testing the Fastify swagger API',
+          description:
+            'A comprehensive API for managing your to-do lists efficiently using Fastify.',
           version: '1.0.0',
         },
+        tags: [
+          {
+            name: 'users',
+            description: 'Operations related to user management',
+          },
+        ],
         components: {
           securitySchemes: {
             bearerAuth: {
