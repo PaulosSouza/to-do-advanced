@@ -1,0 +1,159 @@
+{
+  "use-case": {
+    "prefix": ";uc",
+    "body": [
+      "import { Either } from '@/core/logic/either';",
+      "",
+      "interface $1UseCaseRequest {",
+      "}",
+      "",
+      "type $1UseCaseError = null",
+      "",
+      "type $1UseCaseResponse = Either<$1UseCaseError, {}>;",
+      "",
+      "export class $1UseCase {",
+      "\tconstructor() {}",
+      "",
+      "\tasync execute({}: $1UseCaseRequest): Promise<$1UseCaseResponse> {",
+      "\t\t",
+      "\t}",
+      "}"
+    ],
+    "description": "Use Case snippet"
+  },
+  "fake-provider": {
+    "prefix": ";fp",
+    "body": [
+      "",
+      "export class Fake$1 implements $2 {",
+      "\t// Implement methods if needed",
+      "}"
+    ],
+    "description": "Creates a class for implementing some fake provider"
+  },
+  "provider": {
+    "prefix": ";p",
+    "body": [
+      "",
+      "export class $1Provider implements $2 {",
+      "\t// Implement methods if needed",
+      "}"
+    ],
+    "description": "Creates a class for implementing some provider"
+  },
+  "create-provider": {
+    "prefix": ";cp",
+    "body": [
+      "export interface $1Provider {",
+      "\t$2",
+      "}"
+    ],
+    "description": "Creates an interface for providers"
+  },
+  "repository": {
+    "prefix": ";r",
+    "body": [
+      "export interface $1Repository {",
+      "\tcreate(): Promise<void>;",
+      "}"
+    ],
+    "description": "Creates a repository interface with a create method"
+  },
+  "in-memory-repository": {
+    "prefix": ";imr",
+    "body": [
+      "",
+      "export class InMemory$1Repository implements $1Repository {",
+      "\tpublic items: $2[] = [];",
+      "}"
+    ],
+    "description": "Creates a class for an in-memory implementation of a repository"
+  },
+  "domain-error": {
+    "prefix": ";de",
+    "body": [
+      "import { DomainError } from '@/core/error/domain-error';",
+      "",
+      "export class $1 extends Error implements DomainError {",
+      "\tconstructor() {",
+      "\t\tsuper($2);",
+      "\t}",
+      "}"
+    ],
+    "description": "Creates a class for domain errors"
+  },
+  "use-case-error": {
+    "prefix": ";uce",
+    "body": [
+      "import { UseCaseError } from '@/core/error/use-case-error';",
+      "",
+      "export class $1 extends Error implements UseCaseError {",
+      "\tconstructor() {",
+      "\t\tsuper($2);",
+      "\t\tthis.name = '$1';",
+      "\t}",
+      "}"
+    ],
+    "description": "Creates a class for domain errors"
+  },
+  "use-case-test": {
+    "prefix": ";uct",
+    "body": [
+      "let useCase: $1;",
+      "",
+      "describe('$2', () => {",
+      "\tbeforeEach(() => {",
+      "\t\tuseCase = new $1();",
+      "\t});",
+      "",
+      "\tit('should be able to $3', async () => {",
+      "\t\t// Test implementation goes here",
+      "\t});",
+      "});"
+    ],
+    "description": "Creates a test structure for use cases."
+  },
+  "domain": {
+    "prefix": ";d",
+    "body": [
+      "import { Entity, EntityProps } from '@/core/entities/entity';",
+      "",
+      "export interface $1Props extends EntityProps {",
+      "\t $2",
+      "}",
+      "",
+      "export class $1 extends Entity<$1Props> {",
+      "\tstatic create(props: $1Props, id?: string) {",
+      "\t\tconst $1 = new $1(props, id);",
+      "",
+      "\t\treturn $1;",
+      "\t}",
+      "}",
+      ""
+    ],
+    "description": "Creates a simplified Transaction class"
+  },
+  "dtos-schema": {
+    "prefix": ";ds",
+    "body": [
+      "import { z } from 'zod';",
+      "",
+      "export const $1BodySchema = z.object({",
+      "  $2",
+      "});"
+    ],
+    "description": "Template for a Zod body schema"
+  },
+  "controller": {
+    "prefix": ";c",
+    "body": [
+      "",
+      "export class $1Controller {",
+      "  async handle() {",
+      "    ",
+      "  }",
+      "}"
+    ],
+    "description": "Template for an Fastify Controller"
+  },
+}

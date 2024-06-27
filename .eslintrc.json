@@ -9,7 +9,10 @@
   },
   "rules": {
     "import/no-extraneous-dependencies": "off",
+    "no-catch-shadow": "off",
     "@typescript-eslint/naming-convention": "off",
-    "@typescript-eslint/no-misused-promises": "off"
+    "@typescript-eslint/no-misused-promises": "off",
+    "@typescript-eslint/require-await": "off",
+    "@typescript-eslint/no-extraneous-class": "off"
   }
 }

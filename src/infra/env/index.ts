@@ -6,7 +6,11 @@ import { z } from 'zod';
 
 const envSchema = z.object({
   NODE_ENV: z.enum(['dev', 'test', 'production']).default('dev'),
+  MONGODB_URL: z.string().url(),
+  POSTGRESQL_URL: z.string().url(),
+  POSTGRESQL_SCHEMA: z.string().default('public'),
   PORT: z.coerce.number().default(3333),
+  ROOT_DIR: z.string(),
 });
 
 const envParsed = envSchema.safeParse(process.env);

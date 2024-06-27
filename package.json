@@ -7,6 +7,10 @@
     "start:dev": "tsx watch src/infra/server.ts",
     "start:prd": "node dist/src/infra/server.js",
     "build": "swc src --ignore **/*.spec.ts,**/*.e2e-spec.ts -d dist",
+    "typeorm": "tsx -r dotenv-flow/config -r tsconfig-paths/register node_modules/.bin/typeorm",
+    "typeorm:migration:create": "sh src/scripts/create-migration.sh",
+    "typeorm:migration:run": "sh src/scripts/run-migration.sh",
+    "typeorm:migration:revert": "sh src/scripts/revert-migration.sh",
     "ts:check": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
@@ -23,8 +27,12 @@
     "@shopify/eslint-plugin": "^45.0.0",
     "@swc/cli": "^0.3.12",
     "@swc/core": "^1.6.1",
-    "@types/node": "^20.14.5",
+    "@types/bcrypt": "^5.0.2",
+    "@types/node": "^20.14.8",
+    "@types/supertest": "^6.0.2",
     "husky": "^9.0.11",
+    "supertest": "^7.0.0",
+    "tsconfig-paths": "^4.2.0",
     "tsx": "^4.15.6",
     "typescript": "^5.4.5",
     "unplugin-swc": "^1.4.5",
@@ -32,10 +40,16 @@
     "vitest": "^1.6.0"
   },
   "dependencies": {
-    "@fastify/swagger": "^8.14.0",
-    "@fastify/swagger-ui": "^4.0.0",
+    "@fastify/awilix": "^5.1.0",
+    "awilix": "^10.0.2",
+    "bcrypt": "^5.1.1",
+    "dotenv-flow": "^4.1.0",
     "fastify": "^4.28.0",
     "fastify-zod": "^1.4.0",
+    "mongoose": "^8.4.3",
+    "pg": "^8.12.0",
+    "reflect-metadata": "^0.2.2",
+    "typeorm": "^0.3.20",
     "zod": "^3.23.8"
   }
 }
