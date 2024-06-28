@@ -20,6 +20,10 @@ export async function loadFastifyZod(app: FastifyInstance) {
             name: 'users',
             description: 'Operations related to user management',
           },
+          {
+            name: 'authentication',
+            description: 'Endpoints related to user authentication',
+          },
         ],
         components: {
           securitySchemes: {

@@ -8,6 +8,7 @@ const envSchema = z.object({
   NODE_ENV: z.enum(['dev', 'test', 'production']).default('dev'),
   MONGODB_URL: z.string().url(),
   POSTGRESQL_URL: z.string().url(),
+  JWT_SECRET: z.string(),
   PORT: z.coerce.number().default(3333),
 });
 

@@ -1,34 +1,30 @@
 import { Email } from '../entities/value-objects/email';
 import { Password } from '../entities/value-objects/password';
 
-import { AuthenticateUserUseCase } from './authenticate-user';
 import { WrongCredentialsError } from './errors/wrong-credentilas-error';
+import { ValidateUserCredentialsUseCase } from './validate-user-credentials';
 
 import { makeUser } from '@/test/factories/make-user';
-import { FakeEncryptProvider } from '@/test/providers/fake-encrypt-provider';
 import { FakeHashProvider } from '@/test/providers/fake-hash-provider';
 import { InMemoryUsersRepository } from '@/test/repositories/in-memory-users-repository';
 
 let inMemoryUsersRepository: InMemoryUsersRepository;
 let fakeHashProvider: FakeHashProvider;
-let fakeEncryptProvider: FakeEncryptProvider;
 
-let useCase: AuthenticateUserUseCase;
+let useCase: ValidateUserCredentialsUseCase;
 
-describe('Authenticate User', () => {
+describe('Validate User Credentials', () => {
   beforeEach(() => {
     inMemoryUsersRepository = new InMemoryUsersRepository();
     fakeHashProvider = new FakeHashProvider();
-    fakeEncryptProvider = new FakeEncryptProvider();
 
-    useCase = new AuthenticateUserUseCase(
+    useCase = new ValidateUserCredentialsUseCase(
       inMemoryUsersRepository,
       fakeHashProvider,
-      fakeEncryptProvider,
     );
   });
 
-  it('should be able to authenticate a user', async () => {
+  it('should be able to validate a user credentials', async () => {
     const hashedPassword = await fakeHashProvider.generate('fakePasswordTest@');
 
     const user = makeUser({
@@ -47,12 +43,12 @@ describe('Authenticate User', () => {
 
     expect(result.value).toEqual(
       expect.objectContaining({
-        token: expect.any(String),
+        user,
       }),
     );
   });
 
-  it('should not be able to authenticate an employee with wrong email', async () => {
+  it('should not be able to validate a user credentials with wrong email', async () => {
     const hashedPassword = await fakeHashProvider.generate('fakePasswordTest@');
 
     const user = makeUser({
@@ -71,7 +67,7 @@ describe('Authenticate User', () => {
     expect(response.value).toBeInstanceOf(WrongCredentialsError);
   });
 
-  it('should not be able to authenticate an employee that password does not match', async () => {
+  it('should not be able to validate a user credentials that password does not match', async () => {
     const hashedPassword = await fakeHashProvider.generate('fakePasswordTest@');
 
     const user = makeUser({

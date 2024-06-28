@@ -7,6 +7,7 @@ import { TypeormAuditsRepository } from '../databases/typeorm/repositories/typeo
 import { BcryptHashProvider } from '../providers/hash-provider/bcrypt-hash-provider';
 
 import { RegisterUserUseCase } from '@/domain/use-cases/register-user';
+import { ValidateUserCredentialsUseCase } from '@/domain/use-cases/validate-user-credentials';
 
 export async function loadFastifyAwilix(app: FastifyInstance) {
   await app.register(fastifyAwilixPlugin, {
@@ -42,6 +43,13 @@ export async function loadFastifyAwilix(app: FastifyInstance) {
             auditsRepository,
             hashProvider,
           ),
+        config.useCases,
+      ),
+
+      // Validate User Use Case
+      validateUserCredentialsUseCase: asFunction(
+        ({ usersRepository, hashProvider }: Cradle) =>
+          new ValidateUserCredentialsUseCase(usersRepository, hashProvider),
         config.useCases,
       ),
     });

@@ -1,36 +1,35 @@
 import { UsersRepository } from '../repositories/users-repository';
 import { HashProvider } from '../providers/hash-provider';
-import { EncryptProvider } from '../providers/encrypt-provider';
+import { User } from '../entities/user';
 
 import { WrongCredentialsError } from './errors/wrong-credentilas-error';
 
 import { Either, failure, success } from '@/core/logic/either';
 
-interface AuthenticateUserUseCaseRequest {
+interface ValidateUserCredentialsUseCaseRequest {
   email: string;
   password: string;
 }
 
-type AuthenticateUserUseCaseError = WrongCredentialsError;
+type ValidateUserCredentialsUseCaseError = WrongCredentialsError;
 
-type AuthenticateUserUseCaseResponse = Either<
-  AuthenticateUserUseCaseError,
+type ValidateUserCredentialsUseCaseResponse = Either<
+  ValidateUserCredentialsUseCaseError,
   {
-    token: string;
+    user: User;
   }
 >;
 
-export class AuthenticateUserUseCase {
+export class ValidateUserCredentialsUseCase {
   constructor(
     private readonly usersRepository: UsersRepository,
     private readonly hashProvider: HashProvider,
-    private readonly encryptProvider: EncryptProvider,
   ) {}
 
   async execute({
     email,
     password,
-  }: AuthenticateUserUseCaseRequest): Promise<AuthenticateUserUseCaseResponse> {
+  }: ValidateUserCredentialsUseCaseRequest): Promise<ValidateUserCredentialsUseCaseResponse> {
     const user = await this.usersRepository.findByEmail(email);
 
     if (!user) {
@@ -46,8 +45,6 @@ export class AuthenticateUserUseCase {
       return failure(new WrongCredentialsError());
     }
 
-    const token = this.encryptProvider.encrypt({ sub: user.id });
-
-    return success({ token });
+    return success({ user });
   }
 }
