@@ -24,6 +24,7 @@
   "devDependencies": {
     "@commitlint/cli": "^19.3.0",
     "@commitlint/config-conventional": "^19.2.2",
+    "@faker-js/faker": "^8.4.1",
     "@shopify/eslint-plugin": "^45.0.0",
     "@swc/cli": "^0.3.12",
     "@swc/core": "^1.6.1",

@@ -32,6 +32,12 @@ export class Email {
     return success(new Email(formattedEmail));
   }
 
+  public static createFromValidEmail(email: string) {
+    const formattedEmail = this.format(email);
+
+    return new Email(formattedEmail);
+  }
+
   private readonly email: string;
 
   get value(): string {
