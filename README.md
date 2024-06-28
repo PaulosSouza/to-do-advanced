@@ -69,6 +69,8 @@ cp .env.example .env
 ### Running Locally
 To run the project locally, use the following command:
 
+>If you did not run the Docker Compose command and already have MongoDB and PostgreSQL set up with your credentials, you must update the MONGODB_URL and POSTGRESQL_URL environment variables accordingly.
+
 ```bash
 npm run start:dev
 ```
