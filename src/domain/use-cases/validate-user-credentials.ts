@@ -1,6 +1,9 @@
 import { UsersRepository } from '../repositories/users-repository';
 import { HashProvider } from '../providers/hash-provider';
 import { User } from '../entities/user';
+import { AuditsRepository } from '../repositories/audits-repository';
+import { Audit } from '../entities/audit';
+import { Action } from '../enums/action';
 
 import { WrongCredentialsError } from './errors/wrong-credentials-error';
 
@@ -23,6 +26,7 @@ type ValidateUserCredentialsUseCaseResponse = Either<
 export class ValidateUserCredentialsUseCase {
   constructor(
     private readonly usersRepository: UsersRepository,
+    private readonly auditsRepository: AuditsRepository,
     private readonly hashProvider: HashProvider,
   ) {}
 
@@ -44,6 +48,13 @@ export class ValidateUserCredentialsUseCase {
     if (!doesPasswordMatches) {
       return failure(new WrongCredentialsError());
     }
+
+    const audit = Audit.create({
+      action: Action.UserAuthenticated,
+      userId: user.id,
+    });
+
+    await this.auditsRepository.create(audit);
 
     return success({ user });
   }

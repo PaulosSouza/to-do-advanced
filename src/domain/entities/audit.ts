@@ -1,5 +1,6 @@
 import { Action } from '../enums/action';
 
+import { Optional } from '@/core/types/optional';
 import { Entity, EntityProps } from '@/core/entities/entity';
 
 export interface AuditProps extends EntityProps {
@@ -26,8 +27,14 @@ export class Audit extends Entity<AuditProps> {
     return this.props.metadata;
   }
 
-  static create(props: AuditProps, id?: string) {
-    const audit = new Audit(props, id);
+  static create(props: Optional<AuditProps, 'timestamp'>, id?: string) {
+    const audit = new Audit(
+      {
+        timestamp: props.timestamp ?? new Date(),
+        ...props,
+      },
+      id,
+    );
 
     return audit;
   }

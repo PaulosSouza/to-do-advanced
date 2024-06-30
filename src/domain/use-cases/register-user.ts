@@ -78,7 +78,6 @@ export class RegisterUserUseCase {
 
     const audit = Audit.create({
       action: Action.UserRegistered,
-      timestamp: new Date(),
       userId,
       metadata: JSON.stringify(user),
     });

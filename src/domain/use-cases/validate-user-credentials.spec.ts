@@ -4,11 +4,13 @@ import { Password } from '../entities/value-objects/password';
 import { WrongCredentialsError } from './errors/wrong-credentials-error';
 import { ValidateUserCredentialsUseCase } from './validate-user-credentials';
 
+import { InMemoryAuditsRepository } from '@/test/repositories/in-memory-audits-repository';
 import { makeUser } from '@/test/factories/make-user';
 import { FakeHashProvider } from '@/test/providers/fake-hash-provider';
 import { InMemoryUsersRepository } from '@/test/repositories/in-memory-users-repository';
 
 let inMemoryUsersRepository: InMemoryUsersRepository;
+let inMemoryAuditRepository: InMemoryAuditsRepository;
 let fakeHashProvider: FakeHashProvider;
 
 let useCase: ValidateUserCredentialsUseCase;
@@ -16,10 +18,12 @@ let useCase: ValidateUserCredentialsUseCase;
 describe('Validate User Credentials', () => {
   beforeEach(() => {
     inMemoryUsersRepository = new InMemoryUsersRepository();
+    inMemoryAuditRepository = new InMemoryAuditsRepository();
     fakeHashProvider = new FakeHashProvider();
 
     useCase = new ValidateUserCredentialsUseCase(
       inMemoryUsersRepository,
+      inMemoryAuditRepository,
       fakeHashProvider,
     );
   });
