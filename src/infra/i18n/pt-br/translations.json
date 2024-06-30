@@ -1,0 +1,16 @@
+{
+  "core": {
+    "resource-not-found": "Recurso '{{resource}}' não encontrado.",
+    "all-updated-values-undefined": "Todos os valores destinados à atualização estão indefinidos.",
+    "already-exists": "O recurso '{{resource}}' já existe."
+  },
+  "use-case": {
+    "wrong-credentials": "Credenciais inválidas."
+  },
+  "domain": {
+    "at-least-one-special-character-password": "A senha deve conter pelo menos um caractere especial.",
+    "invalid-email": "O email '{{email}}' é inválido.",
+    "invalid-name-length": "O nome deve ter entre 2 e 255 caracteres.",
+    "invalid-password-length": "A senha deve ter entre 8 e 32 caracteres."
+  }
+}

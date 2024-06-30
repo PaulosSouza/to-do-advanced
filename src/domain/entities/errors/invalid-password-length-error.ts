@@ -1,7 +1,8 @@
-import { DomainError } from '@/core/error/domain-error';
+import { AppError } from '@/core/error/app-error';
+import { I18NextDomain } from '@/core/infra/enums/i18next';
 
-export class InvalidPasswordLengthError extends Error implements DomainError {
+export class InvalidPasswordLengthError extends AppError {
   constructor() {
-    super('The password must have between 8 and 32 characters.');
+    super(I18NextDomain.InvalidPasswordLength);
   }
 }

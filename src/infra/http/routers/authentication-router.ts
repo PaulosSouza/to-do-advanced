@@ -16,11 +16,11 @@ export async function authenticationRouter(app: FastifyInstance) {
         },
       },
     },
-    async ({ body, diScope }, reply) => {
+    async ({ body, diScope, t }, reply) => {
       await AuthenticateUserController.handle({
         body,
-        validateUserCredentialsUseCase:
-          diScope.cradle.validateUserCredentialsUseCase,
+        i18n: t,
+        useCase: diScope.cradle.validateUserCredentialsUseCase,
         reply,
       });
     },

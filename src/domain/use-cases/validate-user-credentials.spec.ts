@@ -1,7 +1,7 @@
 import { Email } from '../entities/value-objects/email';
 import { Password } from '../entities/value-objects/password';
 
-import { WrongCredentialsError } from './errors/wrong-credentilas-error';
+import { WrongCredentialsError } from './errors/wrong-credentials-error';
 import { ValidateUserCredentialsUseCase } from './validate-user-credentials';
 
 import { makeUser } from '@/test/factories/make-user';

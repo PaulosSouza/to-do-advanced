@@ -1,4 +1,5 @@
 import type { FastifyReply } from 'fastify';
+import { TFunction } from 'i18next';
 
 import { AuthenticateUserRequest } from '../dtos/authenticate-user-dto';
 
@@ -7,17 +8,19 @@ import { ValidateUserCredentialsUseCase } from '@/domain/use-cases/validate-user
 
 interface AuthenticateUserControllerProps {
   body: AuthenticateUserRequest;
-  validateUserCredentialsUseCase: ValidateUserCredentialsUseCase;
+  i18n: TFunction;
+  useCase: ValidateUserCredentialsUseCase;
   reply: FastifyReply;
 }
 
 export class AuthenticateUserController {
   public static async handle({
     body: { email, password },
-    validateUserCredentialsUseCase,
+    i18n,
+    useCase,
     reply,
   }: AuthenticateUserControllerProps) {
-    const result = await validateUserCredentialsUseCase.execute({
+    const result = await useCase.execute({
       email,
       password,
     });
@@ -26,7 +29,7 @@ export class AuthenticateUserController {
       const error = result.value;
 
       return reply.status(HttpStatusCode.BadRequest).send({
-        message: error.message,
+        message: i18n(error.i18nKey, error.i18nResources),
       });
     }
 

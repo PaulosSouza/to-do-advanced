@@ -1,10 +1,8 @@
-import { DomainError } from '@/core/error/domain-error';
+import { AppError } from '@/core/error/app-error';
+import { I18NextDomain } from '@/core/infra/enums/i18next';
 
-export class AtLeastOneSpecialCharacterPasswordError
-  extends Error
-  implements DomainError
-{
+export class AtLeastOneSpecialCharacterPasswordError extends AppError {
   constructor() {
-    super('The password must contain at least one special character.');
+    super(I18NextDomain.AtLeastOneSpecialCharacterPassword);
   }
 }

@@ -1,4 +1,5 @@
 import type { FastifyReply } from 'fastify';
+import { TFunction } from 'i18next';
 
 import { RegisterUserBody } from '../dtos/register-user-dto';
 
@@ -7,17 +8,19 @@ import { RegisterUserUseCase } from '@/domain/use-cases/register-user';
 
 interface RegisterUserControllerProps {
   body: RegisterUserBody;
-  registerUserUseCase: RegisterUserUseCase;
+  useCase: RegisterUserUseCase;
+  i18n: TFunction;
   reply: FastifyReply;
 }
 
 export class RegisterUserController {
   async handle({
     body: { email, name, password },
-    registerUserUseCase,
+    i18n,
+    useCase,
     reply,
   }: RegisterUserControllerProps) {
-    const result = await registerUserUseCase.execute({
+    const result = await useCase.execute({
       email,
       name,
       password,
@@ -27,7 +30,7 @@ export class RegisterUserController {
       const error = result.value;
 
       return reply.status(HttpStatusCode.BadRequest).send({
-        message: error.message,
+        message: i18n(error.i18nKey, error.i18nResources),
       });
     }
 

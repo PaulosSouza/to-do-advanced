@@ -10,7 +10,7 @@ import { Audit } from '../entities/audit';
 import { Action } from '../enums/action';
 import { HashProvider } from '../providers/hash-provider';
 
-import { AlreadyExists } from '@/core/error/use-cases/already-exists';
+import { AlreadyExistsError } from '@/core/error/use-cases/already-exists-error';
 import { Either, failure, success } from '@/core/logic/either';
 
 interface RegisterUserUseCaseRequest {
@@ -23,7 +23,7 @@ type RegisterUserUseCaseError =
   | InvalidNameLengthError
   | PasswordError
   | InvalidEmailError
-  | AlreadyExists;
+  | AlreadyExistsError;
 
 type RegisterUserUseCaseResponse = Either<
   RegisterUserUseCaseError,
@@ -63,7 +63,7 @@ export class RegisterUserUseCase {
     const emailAlreadyExists = await this.usersRepository.findByEmail(email);
 
     if (emailAlreadyExists) {
-      return failure(new AlreadyExists(email));
+      return failure(new AlreadyExistsError(email));
     }
 
     const passwordHashed = await this.hashProvider.generate(password);

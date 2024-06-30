@@ -1,0 +1,16 @@
+{
+  "core": {
+    "resource-not-found": "Resource '{{resource}}' not found.",
+    "all-updated-values-undefined": "All values intended for update are undefined.",
+    "already-exists": "Resource '{{resource}}' already exists."
+  },
+  "use-case": {
+    "wrong-credentials": "Credentials are invalid."
+  },
+  "domain": {
+    "at-least-one-special-character-password": "The password must contain at least one special character.",
+    "invalid-email": "Email '{{email}}' is invalid.",
+    "invalid-name-length": "Name must have between 2 and 255 characters",
+    "invalid-password-length": "Password must have between 8 and 32 characters."
+  }
+}

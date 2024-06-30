@@ -3,12 +3,15 @@ import type { FastifyInstance } from 'fastify';
 
 import { schemas } from '../http/schemas';
 
+const { $ref: gefJsonSchemaFn, schemas: jsonSchemas } =
+  buildJsonSchemas(schemas);
+
 export async function loadFastifyZod(app: FastifyInstance) {
   await register(app, {
-    jsonSchemas: buildJsonSchemas(schemas),
+    jsonSchemas: { $ref: gefJsonSchemaFn, schemas: jsonSchemas },
     swaggerOptions: {
       openapi: {
-        openapi: '3.0.0',
+        openapi: '3.1.0',
         info: {
           title: 'To do - The New Way',
           description:
@@ -45,5 +48,28 @@ export async function loadFastifyZod(app: FastifyInstance) {
     swaggerUiOptions: {
       routePrefix: '/docs',
     },
+  });
+
+  app.addHook('onRoute', (routeOptions) => {
+    if (routeOptions.schema) {
+      routeOptions.schema.headers = {
+        'accept-language': {
+          enum: ['en', 'pt-br'],
+          default: 'en',
+          description: 'Language preference for the response.',
+        },
+      };
+
+      const defaultRequestErrorRef = gefJsonSchemaFn(
+        'ErrorResponseSchema',
+      ).$ref;
+
+      routeOptions.schema.response = {
+        400: {
+          $ref: defaultRequestErrorRef,
+          description: 'Bad Request',
+        },
+      };
+    }
   });
 }

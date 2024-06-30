@@ -46,7 +46,7 @@ export async function loadFastifyAwilix(app: FastifyInstance) {
         config.useCases,
       ),
 
-      // Validate User Use Case
+      // Validate User Credentials Use Case
       validateUserCredentialsUseCase: asFunction(
         ({ usersRepository, hashProvider }: Cradle) =>
           new ValidateUserCredentialsUseCase(usersRepository, hashProvider),

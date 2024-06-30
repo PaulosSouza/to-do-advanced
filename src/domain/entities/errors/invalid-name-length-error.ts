@@ -1,7 +1,8 @@
-import { DomainError } from '@/core/error/domain-error';
+import { AppError } from '@/core/error/app-error';
+import { I18NextDomain } from '@/core/infra/enums/i18next';
 
-export class InvalidNameLengthError extends Error implements DomainError {
+export class InvalidNameLengthError extends AppError {
   constructor() {
-    super('The name must have between 2 and 255 characters');
+    super(I18NextDomain.InvalidNameLength);
   }
 }

@@ -2,7 +2,7 @@ import { UsersRepository } from '../repositories/users-repository';
 import { HashProvider } from '../providers/hash-provider';
 import { User } from '../entities/user';
 
-import { WrongCredentialsError } from './errors/wrong-credentilas-error';
+import { WrongCredentialsError } from './errors/wrong-credentials-error';
 
 import { Either, failure, success } from '@/core/logic/either';
 

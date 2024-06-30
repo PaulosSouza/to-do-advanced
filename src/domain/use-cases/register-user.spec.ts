@@ -8,7 +8,7 @@ import { RegisterUserUseCase } from './register-user';
 import { FakeHashProvider } from '@/test/providers/fake-hash-provider';
 import { InMemoryAuditsRepository } from '@/test/repositories/in-memory-audits-repository';
 import { InMemoryUsersRepository } from '@/test/repositories/in-memory-users-repository';
-import { AlreadyExists } from '@/core/error/use-cases/already-exists';
+import { AlreadyExistsError } from '@/core/error/use-cases/already-exists-error';
 
 let inMemoryUsersRepository: InMemoryUsersRepository;
 let inMemoryAuditsRepository: InMemoryAuditsRepository;
@@ -105,6 +105,6 @@ describe('Register User', () => {
     });
 
     expect(result.isFailure());
-    expect(result.value).toBeInstanceOf(AlreadyExists);
+    expect(result.value).toBeInstanceOf(AlreadyExistsError);
   });
 });

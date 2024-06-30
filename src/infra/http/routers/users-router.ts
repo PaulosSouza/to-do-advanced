@@ -1,4 +1,5 @@
 import { FastifyInstance } from 'fastify';
+import { z } from 'zod';
 
 import { RegisterUserController } from '../controllers/register-user-controller';
 
@@ -12,10 +13,11 @@ export async function usersRouter(app: FastifyInstance) {
       operationId: 'createUser',
       body: 'RegisterUserBodySchema',
     },
-    async ({ body, diScope }, reply) => {
+    async ({ body, diScope, t }, reply) => {
       await registerUserController.handle({
         body,
-        registerUserUseCase: diScope.cradle.registerUserUseCase,
+        i18n: t,
+        useCase: diScope.cradle.registerUserUseCase,
         reply,
       });
     },
