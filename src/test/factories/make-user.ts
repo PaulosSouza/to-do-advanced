@@ -13,7 +13,8 @@ export function makeUser(override: Partial<UserProps> = {}, id?: string) {
     override.email?.value ?? faker.internet.email(),
   );
   const passwordOrError = Password.create(
-    override.password?.value ?? faker.internet.password({ length: 8 }),
+    override.password?.value ??
+      faker.internet.password({ length: 12, prefix: '@Password' }),
   );
 
   if (

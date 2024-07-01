@@ -6,7 +6,7 @@ export class InMemoryUsersRepository implements UsersRepository {
 
   async findByEmail(email: string): Promise<User | null> {
     const user = this.items.find(
-      (currentEmployee) => currentEmployee.email.value === email,
+      (currentUser) => currentUser.email.value === email,
     );
 
     if (!user) {
@@ -20,5 +20,15 @@ export class InMemoryUsersRepository implements UsersRepository {
     this.items.push(user);
 
     return { id: user.id };
+  }
+
+  async findById(userId: string): Promise<User | null> {
+    const user = this.items.find((currentUser) => currentUser.id === userId);
+
+    if (!user) {
+      return null;
+    }
+
+    return user;
   }
 }
