@@ -20,7 +20,12 @@ interface CreateTaskUseCaseRequest {
 
 type CreateTaskUseCaseError = ResourceNotFoundError | InvalidNameLengthError;
 
-type CreateTaskUseCaseResponse = Either<CreateTaskUseCaseError, null>;
+type CreateTaskUseCaseResponse = Either<
+  CreateTaskUseCaseError,
+  {
+    task: Task;
+  }
+>;
 
 export class CreateTaskUseCase {
   constructor(
@@ -54,7 +59,9 @@ export class CreateTaskUseCase {
       userId,
     });
 
-    await this.tasksRepository.create(task);
+    const { id: taskId } = await this.tasksRepository.create(task);
+
+    task.id = taskId;
 
     const audit = Audit.create({
       action: Action.TaskCreated,
@@ -64,6 +71,8 @@ export class CreateTaskUseCase {
 
     await this.auditsRepository.create(audit);
 
-    return success(null);
+    return success({
+      task,
+    });
   }
 }

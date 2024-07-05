@@ -156,4 +156,18 @@
     ],
     "description": "Template for an Fastify Controller"
   },
+  "mongoose-repository": {
+    "prefix": ";mr",
+    "body": [
+      "import { Mongoose$1Mapper } from '../mappers/mongoose-$1-mapper';",
+      "",
+      "import { $1 } from '@/domain/entities/$1';",
+      "import { $1sRepository } from '@/domain/repositories/$1s-repository';",
+      "",
+      "export class Mongoose$1sRepository implements $1sRepository {",
+      "\t}",
+      "}"
+    ],
+    "description": "Creates a class for a Mongoose$1sRepository implementing $1sRepository"
+  }
 }

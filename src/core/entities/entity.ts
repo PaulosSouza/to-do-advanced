@@ -11,13 +11,17 @@ export interface EntityProps {
 export abstract class Entity<T extends EntityProps> {
   protected readonly props: Optional<T, 'createdAt'>;
 
-  private readonly _id: string;
+  private _id: string;
   private readonly _createdAt: Date;
   private _updatedAt?: Date | null;
   private _deletedAt?: Date | null;
 
   get id() {
     return this._id;
+  }
+
+  set id(id: string) {
+    this._id = id;
   }
 
   get createdAt() {

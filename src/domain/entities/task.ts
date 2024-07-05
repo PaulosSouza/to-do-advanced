@@ -13,6 +13,22 @@ export interface TaskProps extends EntityProps {
 }
 
 export class Task extends Entity<TaskProps> {
+  get name() {
+    return this.props.name;
+  }
+
+  get description() {
+    return this.props.description;
+  }
+
+  get status() {
+    return this.props.status;
+  }
+
+  get userId() {
+    return this.props.userId;
+  }
+
   static create(props: Optional<TaskProps, 'status'>, id?: string) {
     const task = new Task(
       {

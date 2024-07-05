@@ -10,6 +10,7 @@
   "rules": {
     "import/no-extraneous-dependencies": "off",
     "no-catch-shadow": "off",
+    "consistent-return": "off",
     "@typescript-eslint/naming-convention": "off",
     "@typescript-eslint/no-misused-promises": "off",
     "@typescript-eslint/require-await": "off",

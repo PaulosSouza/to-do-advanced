@@ -5,9 +5,11 @@ import { FastifyInstance } from 'fastify';
 import { MongooseUsersRepository } from '../databases/mongoose/repositories/mongoose-users-repository';
 import { TypeormAuditsRepository } from '../databases/typeorm/repositories/typeorm-audits-repository';
 import { BcryptHashProvider } from '../providers/hash-provider/bcrypt-hash-provider';
+import { MongooseTasksRepository } from '../databases/mongoose/repositories/mongoose-tasks-repository';
 
 import { RegisterUserUseCase } from '@/domain/use-cases/register-user';
 import { ValidateUserCredentialsUseCase } from '@/domain/use-cases/validate-user-credentials';
+import { CreateTaskUseCase } from '@/domain/use-cases/create-task';
 
 export async function loadFastifyAwilix(app: FastifyInstance) {
   await app.register(fastifyAwilixPlugin, {
@@ -27,6 +29,7 @@ export async function loadFastifyAwilix(app: FastifyInstance) {
   diContainer.register({
     // Repositories
     usersRepository: asClass(MongooseUsersRepository, config.default),
+    tasksRepository: asClass(MongooseTasksRepository, config.default),
     auditsRepository: asClass(TypeormAuditsRepository, config.default),
 
     // Providers
@@ -53,6 +56,17 @@ export async function loadFastifyAwilix(app: FastifyInstance) {
             usersRepository,
             auditsRepository,
             hashProvider,
+          ),
+        config.useCases,
+      ),
+
+      // Create Task Use Case
+      createTaskUseCase: asFunction(
+        ({ usersRepository, auditsRepository, tasksRepository }: Cradle) =>
+          new CreateTaskUseCase(
+            usersRepository,
+            tasksRepository,
+            auditsRepository,
           ),
         config.useCases,
       ),

@@ -17,9 +17,9 @@ async function getFastifyServer() {
   await loadTypeormConnection();
 
   // Fastify Plugins
+  await loadFastifyJwt(app);
   await loadFastifyZod(app);
   await loadFastifyAwilix(app);
-  await loadFastifyJwt(app);
   await loadI18nextHttpMiddlewarePlugin(app);
 
   app.register(indexRouter);

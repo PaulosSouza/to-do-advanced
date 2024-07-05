@@ -5,6 +5,16 @@ import { User } from '@/domain/entities/user';
 import { UsersRepository } from '@/domain/repositories/users-repository';
 
 export class MongooseUsersRepository implements UsersRepository {
+  async findById(userId: string): Promise<User | null> {
+    const user = await MongooseUserModel.findById(userId);
+
+    if (!user) {
+      return null;
+    }
+
+    return MongooseUserMapper.toDomain(user);
+  }
+
   async findByEmail(email: string): Promise<User | null> {
     const user = await MongooseUserModel.findOne({
       email,
